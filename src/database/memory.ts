@@ -1,5 +1,4 @@
 import { accessSync, mkdirSync, readFileSync, writeFileSync } from "fs"
-import { resolve } from "path"
 import { Database } from "."
 
 type databaseFiles = 'orders' | 'items' | 'users'
@@ -121,7 +120,6 @@ class InMemoryRetention extends Database {
     private loadFile(file: databaseFiles) {
         try {
             accessSync(`./tmp/${file}`)
-            console.log(resolve(`./tmp/${file}`))
             const data = readFileSync(`./tmp/${file}`, { encoding: 'utf-8' })
 
             if (data) {

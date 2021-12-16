@@ -1,7 +1,8 @@
 import { FastifyInstance } from "fastify"
 import { database } from "@/initializer"
+import { getErrObj } from "@/utils"
 
-export function addOrdersRoute(server: FastifyInstance) {
+export function registerOrderRoute(server: FastifyInstance) {
     registerOrdersAdd(server)
     registerOrdersGet(server)
     registerOrdersUpdate(server)
@@ -10,40 +11,65 @@ export function addOrdersRoute(server: FastifyInstance) {
 
 function registerOrdersAdd(server: FastifyInstance) {
     server.post('/order/add', async (_, reply) => {
-        const order = reply.request.body as Order
-        if (order) {
-            if (order.id && (order.items && order.items.length > 0) && order.quantity && order.user) {
-                database.addOrder(order)
-                reply.code(200)
-                return { success: true }
+        try {
+            const order = reply.request.body as Order
+            if (order) {
+                if (order.id && (order.items && order.items.length > 0) && order.quantity && order.user) {
+                    database.addOrder(order)
+                    reply.code(200)
+                    return
+                }
             }
+            reply.code(400)
+            return getErrObj(new Error("order object is invalid"))
+        } catch (e) {
+            reply.code(500)
+            return getErrObj(e as Error)
         }
-        reply.code(400)
-        return { success: false }
     })
 }
 
 function registerOrdersGet(server: FastifyInstance) {
     server.get('/order/get', async (request, reply) => {
-        const userID = (request.query as { user?: string }).user
-        if (userID) {
-            return database.getOrder(userID)
+        try {
+            const userID = (request.query as { user_id?: string }).user_id
+            if (userID) {
+                reply.code(200)
+                return database.getOrder(userID)
+            }
+            reply.code(400)
+            return getErrObj(new Error("must specify user_id"))
+        } catch (e) {
+            reply.code(500)
+            return getErrObj(e as Error)
         }
-        reply.code(400)
-        return { success: false }
     })
 }
 
 function registerOrdersUpdate(server: FastifyInstance) {
     server.put('/order/update', async (request, reply) => {
-        const params = request.body as UpdateOrder
-        database.updateOrder(params.order)
+        try {
+            const params = request.body as UpdateOrder
+            database.updateOrder(params.order)
+            reply.code(200)
+            return
+        } catch (e) {
+            reply.code(500)
+            return getErrObj(e as Error)
+        }
     })
 }
 
 function registerOrdersDelete(server: FastifyInstance) {
-    server.put('/order/update', async (request, reply) => {
-        const params = request.body as DeleteOrder
-        database.deleteOrder(params.order_id)
+    server.delete('/order/delete', async (request, reply) => {
+        try {
+            const params = request.body as DeleteOrder
+            database.deleteOrder(params.order_id)
+            reply.code(200)
+            return
+        } catch (e) {
+            reply.code(500)
+            return getErrObj(e as Error)
+        }
     })
 }

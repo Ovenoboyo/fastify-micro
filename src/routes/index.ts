@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { addOrdersRoute } from "./orders";
-import { addUserRoute } from "./users";
+import { registerOrderRoute } from "./orders";
+import { registerUserRoute } from "./users";
 
 export function registerRoutes(server: FastifyInstance) {
-    addUserRoute(server)
-    addOrdersRoute(server)
+    registerUserRoute(server)
+    registerOrderRoute(server)
 }
