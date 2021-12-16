@@ -5,6 +5,8 @@ abstract class Database {
 
   abstract getUser(userID: string): User
   abstract getOrder(userID: string): ParsedOrder[]
+
+  abstract updateOrder(order: Order): void
 }
 
 export { Database }

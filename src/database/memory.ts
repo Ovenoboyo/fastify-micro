@@ -85,6 +85,26 @@ class InMemoryRetention extends Database {
         return parsedOrder
     }
 
+    public updateOrder(order: Order) {
+        if (!this.getUser(order.user)) {
+            throw new Error("Invalid user")
+        }
+
+        if (!this.getOrder(order.id)) {
+            throw new Error("Invalid order")
+        }
+
+        this.orders[order.id] = order;
+    }
+
+    public deleteOrder(orderID: string) {
+        if (!this.getOrder(orderID)) {
+            throw new Error("Invalid order")
+        }
+
+        delete this.orders[orderID]
+    }
+
     // Should be synchronous
     private dumpToFile(file: databaseFiles, data: any) {
         data = JSON.stringify(data)
