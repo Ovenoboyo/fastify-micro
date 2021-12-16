@@ -14,10 +14,10 @@ function registerOrdersAdd(server: FastifyInstance) {
         try {
             const order = reply.request.body as Order
             if (order) {
-                if (order.id && (order.items && order.items.length > 0) && order.quantity && order.user) {
-                    database.addOrder(order)
+                if ((order.items && order.items.length > 0) && order.quantity && order.user) {
+                    const ret = database.addOrder(order)
                     reply.code(200)
-                    return
+                    return { order_id: ret }
                 }
             }
             reply.code(400)
@@ -50,9 +50,9 @@ function registerOrdersUpdate(server: FastifyInstance) {
     server.put('/order/update', async (request, reply) => {
         try {
             const params = request.body as UpdateOrder
-            database.updateOrder(params.order)
+            const ret = database.updateOrder(params.order)
             reply.code(200)
-            return
+            return { order: ret }
         } catch (e) {
             reply.code(500)
             return getErrObj(e as Error)

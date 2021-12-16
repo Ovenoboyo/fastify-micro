@@ -1,3 +1,4 @@
+import { getID } from "@/utils"
 import { accessSync, mkdirSync, readFileSync, writeFileSync } from "fs"
 import { Database } from "."
 
@@ -16,12 +17,12 @@ class InMemoryRetention extends Database {
     }
 
     public addUser(user: User) {
-        if (this.users[user.id]) {
-            throw new Error("User already exists")
-        }
+        user.id = getID()
         this.users[user.id] = user
 
         this.dumpToFile('users', this.users)
+
+        return user.id
     }
 
     public getUser(userID: string) {
@@ -29,13 +30,12 @@ class InMemoryRetention extends Database {
     }
 
     public addItem(item: Item) {
-        if (this.items[item.id]) {
-            throw new Error("Item already exists")
-        }
-
+        item.id = getID()
         this.items[item.id] = item
 
         this.dumpToFile('items', this.items)
+
+        return item.id
     }
 
     public getItem(itemID: string) {
@@ -53,13 +53,12 @@ class InMemoryRetention extends Database {
             }
         }
 
-        if (this.orders[order.id]) {
-            throw new Error("Order already exists")
-        }
-
+        order.id = getID();
         this.orders[order.id] = order
 
         this.dumpToFile('orders', this.orders)
+
+        return order.id;
     }
 
     public getOrder(userID: string): ParsedOrder[] {
@@ -94,6 +93,8 @@ class InMemoryRetention extends Database {
         }
 
         this.orders[order.id] = order;
+
+        return order;
     }
 
     public deleteOrder(orderID: string) {

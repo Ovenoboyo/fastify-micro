@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify"
 import { database } from "@/initializer"
-import { getErrObj } from "@/utils"
+import { getErrObj, validateEmail, validatePhone } from "@/utils"
 
 
 export function registerUserRoute(server: FastifyInstance) {
@@ -8,10 +8,12 @@ export function registerUserRoute(server: FastifyInstance) {
     try {
       const user = reply.request.body as User
       if (user) {
-        if (user.id && user.name && user.email && user.phno) {
-          database.addUser(user)
-          reply.code(200)
-          return
+        if (user.name && user.email && user.phno) {
+          if (validateEmail(user.email) && validatePhone(user.phno)) {
+            const ret = database.addUser(user)
+            reply.code(200)
+            return { user_id: ret }
+          }
         }
       }
       reply.code(400)
