@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "target": "esnext",
-        "module": "esnext",
+        "module": "commonjs",
+        "esModuleInterop": true,
         "allowJs": true,
         "sourceMap": true,
         "rootDir": "./",
@@ -19,7 +20,11 @@
         "noImplicitReturns": true,
         "moduleResolution": "node",
         "baseUrl": "./",
-        "paths": {},
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+        },
         "allowSyntheticDefaultImports": true
     }
 }
