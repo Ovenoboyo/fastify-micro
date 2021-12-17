@@ -3,7 +3,19 @@ import { database } from "../initializer"
 import { validateEmail, validatePhone, getErrObj } from "../utils"
 
 
+/**
+ * Registers all routes for /user related operations
+ * @param server FastifyInstance to which the routes are to be bound
+ */
 export function registerUserRoute(server: FastifyInstance) {
+  registerUserAdd(server)
+}
+
+/**
+ * Registers routes for user add operations
+ * @param server FastifyInstance to which the route is to be bound
+ */
+export function registerUserAdd(server: FastifyInstance) {
   server.post('/user/add', async (_, reply) => {
     try {
       const user = reply.request.body as User

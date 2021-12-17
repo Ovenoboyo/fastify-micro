@@ -1,6 +1,7 @@
 import Fastify from 'fastify'
 import { database } from './initializer'
 import { registerRoutes } from './routes'
+
 const fastify = Fastify({
   logger: true
 })
@@ -14,7 +15,7 @@ fastify.listen(3000, function (err) {
   }
 })
 
-
+// Generate 10 items
 for (let i = 0; i < 10; i++) {
   try {
     database.addItem({

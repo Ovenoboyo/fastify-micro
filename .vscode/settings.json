@@ -1,6 +1,7 @@
 {
-    "cSpell.words": [
-        "Fastify",
-        "phno"
-    ]
+  "cSpell.words": [
+    "Fastify",
+    "phno"
+  ],
+  "editor.tabSize": 2
 }

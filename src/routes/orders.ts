@@ -2,6 +2,10 @@ import { FastifyInstance } from "fastify"
 import { database } from "../initializer"
 import { getErrObj } from "../utils"
 
+/**
+ * Registers all routes for /order related operations
+ * @param server FastifyInstance to which the routes are to be bound
+ */
 export function registerOrderRoute(server: FastifyInstance) {
     registerOrdersAdd(server)
     registerOrdersGet(server)
@@ -9,6 +13,10 @@ export function registerOrderRoute(server: FastifyInstance) {
     registerOrdersDelete(server)
 }
 
+/**
+ * Registers routes for order add operations
+ * @param server FastifyInstance to which the route is to be bound
+ */
 function registerOrdersAdd(server: FastifyInstance) {
     server.post('/order/add', async (_, reply) => {
         try {
@@ -29,6 +37,10 @@ function registerOrdersAdd(server: FastifyInstance) {
     })
 }
 
+/**
+ * Registers routes for order get operations
+ * @param server FastifyInstance to which the route is to be bound
+ */
 function registerOrdersGet(server: FastifyInstance) {
     server.get('/order/get', async (request, reply) => {
         try {
@@ -46,6 +58,10 @@ function registerOrdersGet(server: FastifyInstance) {
     })
 }
 
+/**
+ * Registers routes for order update operations
+ * @param server FastifyInstance to which the route is to be bound
+ */
 function registerOrdersUpdate(server: FastifyInstance) {
     server.put('/order/update', async (request, reply) => {
         try {
@@ -60,6 +76,10 @@ function registerOrdersUpdate(server: FastifyInstance) {
     })
 }
 
+/**
+ * Registers routes for order delete operations
+ * @param server FastifyInstance to which the route is to be bound
+ */
 function registerOrdersDelete(server: FastifyInstance) {
     server.delete('/order/delete', async (request, reply) => {
         try {

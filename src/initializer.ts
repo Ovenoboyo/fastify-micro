@@ -1,3 +1,4 @@
+import { Database } from "./database";
 import { InMemoryRetention } from "./database/memory";
 
-export const database = new InMemoryRetention()
+export const database: Database = new InMemoryRetention()
