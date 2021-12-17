@@ -46,6 +46,7 @@ describe("/order/get", () => {
 describe("/order/add", () => {
   let server: FastifyInstance;
   let userID: string
+  let orderID: string
 
   beforeEach(async () => {
     userID = database.addUser({
@@ -71,12 +72,13 @@ describe("/order/add", () => {
     });
     expect(response.statusCode).toEqual(200);
 
-    const orderID = (JSON.parse(response.body) as { order_id: string }).order_id
+    orderID = (JSON.parse(response.body) as { order_id: string }).order_id
     expect(database.getOrderByUserID(userID)[0].id).toEqual(orderID)
   });
 
   afterEach(async () => {
     database.deleteUser(userID)
+    database.deleteOrder(orderID)
   })
 });
 
@@ -167,5 +169,6 @@ describe("/order/update", () => {
 
   afterEach(async () => {
     database.deleteUser(userID)
+    database.deleteOrder(orderID)
   })
 });
