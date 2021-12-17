@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify"
-import { database } from "@/initializer"
-import { getErrObj, validateEmail, validatePhone } from "@/utils"
+import { database } from "../initializer"
+import { validateEmail, validatePhone, getErrObj } from "../utils"
 
 
 export function registerUserRoute(server: FastifyInstance) {

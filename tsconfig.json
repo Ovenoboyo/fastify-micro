@@ -20,11 +20,7 @@
         "noImplicitReturns": true,
         "moduleResolution": "node",
         "baseUrl": "./",
-        "paths": {
-            "@/*": [
-                "src/*"
-            ],
-        },
+        "paths": {},
         "allowSyntheticDefaultImports": true
     }
 }

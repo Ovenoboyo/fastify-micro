@@ -1,7 +1,6 @@
 import Fastify from 'fastify'
-import { database } from '@/initializer'
-import { registerRoutes } from '@/routes'
-
+import { database } from './initializer'
+import { registerRoutes } from './routes'
 const fastify = Fastify({
   logger: true
 })

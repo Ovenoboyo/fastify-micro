@@ -5,6 +5,13 @@ interface Order {
   items: string[]
 }
 
+interface OrderRequest {
+  id?: string
+  quantity: number
+  user: string
+  items: string[]
+}
+
 interface ParsedOrder extends Order {
   items: Item[]
   user: User

@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify"
-import { database } from "@/initializer"
-import { getErrObj } from "@/utils"
+import { database } from "../initializer"
+import { getErrObj } from "../utils"
 
 export function registerOrderRoute(server: FastifyInstance) {
     registerOrdersAdd(server)
@@ -12,7 +12,7 @@ export function registerOrderRoute(server: FastifyInstance) {
 function registerOrdersAdd(server: FastifyInstance) {
     server.post('/order/add', async (_, reply) => {
         try {
-            const order = reply.request.body as Order
+            const order = reply.request.body as OrderRequest
             if (order) {
                 if ((order.items && order.items.length > 0) && order.quantity && order.user) {
                     const ret = database.addOrder(order)
@@ -66,7 +66,7 @@ function registerOrdersDelete(server: FastifyInstance) {
             const params = request.body as DeleteOrder
             database.deleteOrder(params.order_id)
             reply.code(200)
-            return
+            return {}
         } catch (e) {
             reply.code(500)
             return getErrObj(e as Error)

@@ -6,9 +6,14 @@
   "scripts": {
     "start": "npm-run-all --parallel watch:server watch:build",
     "watch:build": "webpack --watch",
-    "watch:server": "nodemon \"./dist/index.js\" --watch \"./dist\""
+    "watch:server": "nodemon \"./dist/index.js\" --watch \"./dist\"",
+    "test": "NODE_ENV=test npx jest --verbose --runInBand"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/jest": "^27.0.3",
+    "jest": "^27.4.5",
+    "ts-jest": "^27.1.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
     "@babel/core": "^7.0.0-beta.46",
