@@ -3,10 +3,9 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     cache: true,
-    mode: 'development',
+    mode: 'production',
     target: 'node',
     externals: [nodeExternals()],
-    devtool: 'inline-source-map',
     entry: {
         main: './src/index.ts',
     },
@@ -28,6 +27,6 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: ['.js', '.ts'],
+        extensions: ['.ts'],
     },
 };
