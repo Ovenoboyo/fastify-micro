@@ -66,7 +66,7 @@ class InMemoryRetention extends Database {
     return order.id;
   }
 
-  public getOrder(userID: string): ParsedOrder[] {
+  public getOrderByUserID(userID: string): ParsedOrder[] {
     if (!this.getUser(userID)) {
       throw new Error("Invalid user " + userID)
     }
@@ -88,7 +88,7 @@ class InMemoryRetention extends Database {
     return parsedOrder
   }
 
-  private getOrderByID(orderID: string): Order {
+  public getOrderByID(orderID: string): Order {
     return this.orders[orderID]
   }
 

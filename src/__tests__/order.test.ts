@@ -72,7 +72,7 @@ describe("/order/add", () => {
     expect(response.statusCode).toEqual(200);
 
     const orderID = (JSON.parse(response.body) as { order_id: string }).order_id
-    expect(database.getOrder(userID)[0].id).toEqual(orderID)
+    expect(database.getOrderByUserID(userID)[0].id).toEqual(orderID)
   });
 
   afterEach(async () => {
@@ -112,7 +112,7 @@ describe("/order/delete", () => {
       }
     });
     expect(response.statusCode).toEqual(200);
-    expect(database.getOrder(userID).length).toEqual(0)
+    expect(database.getOrderByUserID(userID).length).toEqual(0)
   });
 
   afterEach(async () => {
@@ -158,7 +158,7 @@ describe("/order/update", () => {
     });
 
     expect(response.statusCode).toEqual(200);
-    const updated = database.getOrder(userID)[0]
+    const updated = database.getOrderByUserID(userID)[0]
     expect(updated.quantity).toEqual(60)
     expect(updated.items.length).toEqual(2)
     expect(updated.user.id).toEqual(userID)

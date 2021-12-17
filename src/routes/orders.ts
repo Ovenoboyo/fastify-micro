@@ -47,7 +47,7 @@ function registerOrdersGet(server: FastifyInstance) {
             const userID = (request.query as { user_id?: string }).user_id
             if (userID) {
                 reply.code(200)
-                return database.getOrder(userID)
+                return database.getOrderByUserID(userID)
             }
             reply.code(400)
             return getErrObj(new Error("must specify user_id"))

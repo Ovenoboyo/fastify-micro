@@ -7,7 +7,9 @@ abstract class Database {
   abstract addOrder(order: OrderRequest): string
 
   abstract getUser(userID: string): User
-  abstract getOrder(userID: string): ParsedOrder[]
+  abstract getOrderByUserID(userID: string): ParsedOrder[]
+  abstract getOrderByID(orderID: string): Order
+  abstract getItem(itemID: string): Item
 
   abstract updateOrder(order: Order): void
   abstract deleteOrder(order: string): void
