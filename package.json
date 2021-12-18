@@ -1,7 +1,7 @@
 {
-  "name": "superscholar-assignment",
+  "name": "fastify-typescript-example",
   "version": "1.0.0",
-  "description": "",
+  "description": "A modular example showing the usage of Fastify with typescript, compiled using babel and webpack and tested using jest.",
   "main": "src/index.ts",
   "scripts": {
     "start": "npm-run-all --parallel watch:server watch:build",
